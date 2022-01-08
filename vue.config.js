@@ -10,6 +10,9 @@ module.exports = {
         views: '@/views'
       }
     }
+  },
+  css: {
+    requireModuleExtension: true
   }
 }
 

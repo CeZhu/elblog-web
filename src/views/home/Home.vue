@@ -1,15 +1,25 @@
 <template>
   <div id="home">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti placeat sequi, maxime aperiam pariatur et deleniti modi id porro voluptas necessitatibus, recusandae cum error atque obcaecati! Saepe esse optio est!
+    <blog-list />
+    <el-pagination
+      layout="prev, pager, next"
+      :total="100"
+    />
   </div>
 </template>
 
 <script>
+import BlogList from 'views/blogList/BlogList'
 export default {
-
+  components: {
+    BlogList
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+#home{
+  width:800px;
+  margin-bottom: 60px;
+}
 </style>
