@@ -8,14 +8,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      blog: {
-        title: '这是标题',
-        summary: '这是摘要',
-        releaseDate: '2020-06-23 19:45',
-        clickHit: 10,
-        replyHit: 10
+  props: {
+    blog: {
+      type: Object,
+      default() {
+        return {}
       }
     }
   }
@@ -40,7 +37,8 @@ export default {
   .info{
     float:right;
     font-size: 12px;
-    padding-bottom:10px
+    padding-bottom:10px;
+    padding-top:10px;
   }
 }
 </style>

@@ -5,7 +5,7 @@
       <span id="title">最新博客</span>
     </el-header>
     <el-main>
-      <blog-list-item v-for="item in blogList" :key="item" />
+      <blog-list-item v-for="item in page.contents" :key="item" :blog="item" />
     </el-main>
 
   </el-container>
@@ -17,9 +17,12 @@ export default {
   components: {
     BlogListItem
   },
-  data() {
-    return {
-      blogList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+  props: {
+    page: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   }
 }
