@@ -12,7 +12,16 @@ const router = new VueRouter({
     {
       path: '/home',
       component: () => import('views/home/Home')
+    },
+    {
+      path: '/blog/:id',
+      name: 'blog',
+      component: () => import('views/blog/Blog')
     }
   ]
+})
+router.beforeEach((to, from, next) => {
+  document.documentElement.scrollTop = 0
+  next()
 })
 export default router

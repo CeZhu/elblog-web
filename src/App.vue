@@ -71,6 +71,7 @@ export default {
 #app{
   width:1020px;
   margin:auto;
+  margin-bottom: 100px;
 }
 .top-img{
   height: 100px;

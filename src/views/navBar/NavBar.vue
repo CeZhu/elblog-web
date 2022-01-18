@@ -1,7 +1,7 @@
 <template>
   <div id="nav-bar">
     <div class="wrapper">
-      <div class="home link">首页</div>
+      <div class="home link" @click="goHome">首页</div>
       <div class="link">关于博主</div>
       <div class="link">后台登录</div>
       <div class="right">
@@ -14,7 +14,11 @@
 
 <script>
 export default {
-
+  methods: {
+    goHome() {
+      this.$router.push('/home')
+    }
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@
       <span id="title">最新博客</span>
     </el-header>
     <el-main>
-      <blog-list-item v-for="item in page.contents" :key="item" :blog="item" />
+      <blog-list-item v-for="(item,index) in page.contents" :key="index" :blog="item" />
     </el-main>
 
   </el-container>

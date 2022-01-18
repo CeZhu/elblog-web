@@ -1,12 +1,13 @@
 <template>
   <div id="blog">
-    <div class="title">{{ blog.title }}</div>
-    <div class="summary">摘要: {{ blog.summary }}</div>
-    <div class="info">发表于{{ blog.releaseDate }} 阅读({{ blog.clickHit }}) 评论({{ blog.replyHit }})</div>
+    <div class="title" @click="goToBlog">{{ blog.title }}</div>
+    <div class="summary">摘要: {{ blog.summary }}...</div>
+    <div class="info">发表于{{ releaseDate }} 阅读({{ blog.clickhit }}) 评论({{ blog.replyhit }})</div>
   </div>
 </template>
 
 <script>
+import Datetime from 'utils/datetime.js'
 export default {
   props: {
     blog: {
@@ -14,6 +15,17 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  computed: {
+    releaseDate() {
+      return Datetime.convertDate(this.blog.releasedate)
+    }
+  },
+  methods: {
+    goToBlog() {
+      const id = this.blog.id
+      this.$router.push({ path: `/blog/${id}` })
     }
   }
 }
@@ -27,6 +39,7 @@ export default {
   .title{
     color: #935A32;
     font-weight: bold;
+    cursor: pointer;
   }
 
   .summary{
