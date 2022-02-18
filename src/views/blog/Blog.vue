@@ -9,7 +9,17 @@
         <div class="content">
           <h2>{{ blog.title }}</h2>
           <p class="info">发布时间: {{ releaseDate }} 博客类别: {{ blog.blogType.typename }} 阅读({{ blog.clickhit }}) 评论({{ blog.replyhit }})</p>
-          <p v-html="blog.content" />
+          <!-- <p v-html="blog.content" /> -->
+          <mavon-editor
+            :value="blog.content"
+            :subfield="false"
+            default-open="preview"
+            :toolbars-flag="false"
+            :editable="false"
+            :box-shadow="false"
+            previewbackgroun="#e7e7e7"
+            class="editor"
+          />
         </div>
         <div class="keyword">
           <strong>关键字:</strong> <span v-for="(item,index) in blog.keyword" :key="index">{{ item }}</span>
@@ -42,7 +52,7 @@
         <span>发表评论</span>
       </div>
       <div slot="body">
-        <mavon-editor v-model="editor" class="mavon-editor" />
+        <el-input v-model="editor" type="textarea" rows="4" class="editor" />
         <div class="editor-bottom">
           <label for="vCode">验证码:</label>
           <el-input id="vCode" v-model="vCode" placeholder="请输入..." size="mini" maxlength="5" />
@@ -182,12 +192,6 @@ export default {
     padding: 20px;
   }
 
-  .write-comment{
-    .mavon-editor{
-      z-index: 0;
-    }
-  }
-
   .editor-bottom{
     display: flex;
     align-items: center;
@@ -207,5 +211,9 @@ export default {
 }
 .active:hover{
   text-decoration: underline;
+}
+
+.editor{
+  z-index: 0;
 }
 </style>

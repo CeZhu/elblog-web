@@ -9,17 +9,11 @@
         <div class="btn"><el-button type="primary">搜索</el-button></div>
       </div>
     </div>
-
-    <login v-show="login" ref="login" @cancel="cancel" />
   </div>
 </template>
 
 <script>
-import Login from 'components/login/Login'
 export default {
-  components: {
-    Login
-  },
   data() {
     return {
       login: false
@@ -33,10 +27,7 @@ export default {
       this.$router.push('/about')
     },
     showLogin() {
-      this.login = true
-    },
-    cancel() {
-      this.login = false
+      this.$router.push('/login')
     }
   }
 }

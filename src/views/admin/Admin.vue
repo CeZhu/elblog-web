@@ -1,0 +1,81 @@
+<template>
+  <div id="admin">
+    <el-container>
+      <el-header height="100px">
+        <img src="~assets/img/logo.png" @click="goToHome">
+      </el-header>
+
+      <el-container>
+        <el-aside>
+          <el-menu>
+            <el-submenu index="1">
+              <template slot="title"><i class="el-icon-document" />博客管理</template>
+              <el-menu-item-group>
+                <el-menu-item @click="goToWriteBlog">写博客</el-menu-item>
+                <el-menu-item @click="goToBlogAdmin">博客信息管理</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="2">
+              <template slot="title"><i class="el-icon-collection" />博客类别管理</template><el-menu-item-group>
+                <el-menu-item>博客类别信息管理</el-menu-item>
+              </el-menu-item-group></el-submenu>
+            <el-submenu index="3">
+              <template slot="title"><i class="el-icon-chat-round" />评论管理</template>
+              <el-menu-item-group>
+                <el-menu-item>评论审核</el-menu-item>
+                <el-menu-item>评论信息管理</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="4">
+              <template slot="title"><i class="el-icon-user" />个人信息管理</template>
+              <el-menu-item-group>
+                <el-menu-item>修改个人信息</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="5">
+              <template slot="title"><i class="el-icon-setting" />系统管理</template>
+              <el-menu-item-group>
+                <el-menu-item>友情链接管理</el-menu-item>
+                <el-menu-item>修改密码</el-menu-item>
+                <el-menu-item>刷新系统缓存</el-menu-item>
+                <el-menu-item @click="logout">安全退出</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+        </el-aside>
+        <el-main><router-view /></el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    goToBlogAdmin() {
+      this.$router.push('/admin/blog')
+    },
+    goToWriteBlog() {
+      this.$router.push('/admin/writeBlog')
+      this.$router.push('/admin/blank')
+    },
+    goToHome() {
+      this.$router.push('/home')
+    },
+    logout() {
+      sessionStorage.removeItem('username')
+      this.$router.push('/home')
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+#admin{
+  .el-header{
+    img{
+      cursor: pointer;
+    }
+  }
+}
+</style>

@@ -10,10 +10,15 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       path: '',
       redirect: '/home'
+    },
+    {
+      path: '/login',
+      component: () => import('components/login/Login')
     },
     {
       path: '/front',
@@ -33,12 +38,44 @@ const router = new VueRouter({
           component: () => import('views/about/About')
         }
       ]
+    },
+    {
+      path: '/admin',
+      component: () => import('views/admin/Admin'),
+      children: [
+        {
+          path: '/admin/blog',
+          component: () => import('views/admin/blog/BlogAdmin')
+        },
+        {
+          path: '/admin/writeBlog',
+          name: 'writeBlog',
+          component: () => import('views/admin/blog/WriteBlog')
+        },
+        {
+          path: '/admin/blank',
+          component: () => import('views/admin/Blank')
+        }
+      ]
     }
 
   ]
 })
+
 router.beforeEach((to, from, next) => {
-  document.documentElement.scrollTop = 0
+  const username = sessionStorage.getItem('username')
+  if (to.path === '/login') {
+    if (username) {
+      next('/admin')
+    }
+    next()
+  } else if (to.path.includes('/admin')) {
+    if (username) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
   next()
 })
 export default router

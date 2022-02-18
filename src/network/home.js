@@ -29,3 +29,29 @@ export function getNextBlog(id) {
     }
   })
 }
+
+export function addBlog(blog) {
+  return request({
+    url: '/blog',
+    method: 'post',
+    data: blog
+  })
+}
+
+export function deleteBlog(id) {
+  return request({
+    url: '/blog',
+    method: 'delete',
+    params: {
+      id
+    }
+  })
+}
+
+export function deleteBlogs(ids) {
+  return request({
+    url: '/blog/deleteBlogs',
+    method: 'delete',
+    data: ids
+  })
+}
