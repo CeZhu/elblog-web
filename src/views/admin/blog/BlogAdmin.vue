@@ -31,8 +31,6 @@
       layout="total,prev,pager,next"
       :total="page.total"
       @current-change="currentChangeHandler"
-      @prev-click="prevClickHandler"
-      @next-click="nextClickHandler"
     />
   </div>
 </template>
@@ -101,17 +99,8 @@ export default {
       this.pageNum = currentPage - 1
       this._getBlogs()
     },
-    prevClickHandler(currentPage) {
-      this.pageNum = currentPage - 2
-      this._getBlogs()
-    },
-    nextClickHandler(currentPage) {
-      this.pageNum = currentPage
-      this._getBlogs()
-    },
     selectionChangeHandler(val) {
       this.selection = val
-      console.log(val)
     }
 
   }

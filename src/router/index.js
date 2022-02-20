@@ -55,6 +55,10 @@ const router = new VueRouter({
         {
           path: '/admin/blank',
           component: () => import('views/admin/Blank')
+        },
+        {
+          path: '/admin/blogType',
+          component: () => import('views/admin/blogType/BlogTypeAdmin')
         }
       ]
     }

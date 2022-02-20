@@ -17,7 +17,7 @@
             </el-submenu>
             <el-submenu index="2">
               <template slot="title"><i class="el-icon-collection" />博客类别管理</template><el-menu-item-group>
-                <el-menu-item>博客类别信息管理</el-menu-item>
+                <el-menu-item @click="goToBlogTypeAdmin">博客类别信息管理</el-menu-item>
               </el-menu-item-group></el-submenu>
             <el-submenu index="3">
               <template slot="title"><i class="el-icon-chat-round" />评论管理</template>
@@ -58,6 +58,9 @@ export default {
     goToWriteBlog() {
       this.$router.push('/admin/writeBlog')
       this.$router.push('/admin/blank')
+    },
+    goToBlogTypeAdmin() {
+      this.$router.push('/admin/blogType')
     },
     goToHome() {
       this.$router.push('/home')
