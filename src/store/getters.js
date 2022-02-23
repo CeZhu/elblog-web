@@ -1,3 +1,4 @@
+// 相当于计算属性
 const getters = {
 
 }

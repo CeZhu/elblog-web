@@ -56,7 +56,7 @@ export default {
           this.loading = true
           login(this.user).then(() => {
             sessionStorage.setItem('username', this.user.username)
-            this.$router.push('/admin')
+            this.$router.push('/admin/blog')
           }).catch(err => {
             this.loading = false
             console.log(err.response)

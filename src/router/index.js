@@ -59,6 +59,10 @@ const router = new VueRouter({
         {
           path: '/admin/blogType',
           component: () => import('views/admin/blogType/BlogTypeAdmin')
+        },
+        {
+          path: '/admin/comment',
+          component: () => import('views/admin/comment/commentAdmin')
         }
       ]
     }
@@ -70,7 +74,7 @@ router.beforeEach((to, from, next) => {
   const username = sessionStorage.getItem('username')
   if (to.path === '/login') {
     if (username) {
-      next('/admin')
+      next('/admin/blog')
     }
     next()
   } else if (to.path.includes('/admin')) {

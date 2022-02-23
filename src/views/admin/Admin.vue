@@ -22,8 +22,8 @@
             <el-submenu index="3">
               <template slot="title"><i class="el-icon-chat-round" />评论管理</template>
               <el-menu-item-group>
-                <el-menu-item>评论审核</el-menu-item>
-                <el-menu-item>评论信息管理</el-menu-item>
+                <!-- <el-menu-item>评论审核</el-menu-item> -->
+                <el-menu-item @click="goToCommentAdmin">评论信息管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
@@ -64,6 +64,9 @@ export default {
     },
     goToHome() {
       this.$router.push('/home')
+    },
+    goToCommentAdmin() {
+      this.$router.push('/admin/comment')
     },
     logout() {
       sessionStorage.removeItem('username')
