@@ -29,7 +29,7 @@
             <el-submenu index="4">
               <template slot="title"><i class="el-icon-user" />个人信息管理</template>
               <el-menu-item-group>
-                <el-menu-item>修改个人信息</el-menu-item>
+                <el-menu-item @click="goToBloggerAdmin">修改个人信息</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="5">
@@ -67,6 +67,9 @@ export default {
     },
     goToCommentAdmin() {
       this.$router.push('/admin/comment')
+    },
+    goToBloggerAdmin() {
+      this.$router.push('/admin/blogger')
     },
     logout() {
       sessionStorage.removeItem('username')
