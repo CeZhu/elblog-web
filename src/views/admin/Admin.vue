@@ -36,7 +36,7 @@
               <template slot="title"><i class="el-icon-setting" />系统管理</template>
               <el-menu-item-group>
                 <el-menu-item @click="goToLinkAdmin">友情链接管理</el-menu-item>
-                <el-menu-item>修改密码</el-menu-item>
+                <el-menu-item @click="modifyPassword">修改密码</el-menu-item>
                 <el-menu-item>刷新系统缓存</el-menu-item>
                 <el-menu-item @click="logout">安全退出</el-menu-item>
               </el-menu-item-group>
@@ -46,11 +46,25 @@
         <el-main><router-view /></el-main>
       </el-container>
     </el-container>
+
+    <password-change
+      :dialog-visible="dialogVisible"
+      @handleClose="handleClose"
+    />
   </div>
 </template>
 
 <script>
+import PasswordChange from './system/childComp/PasswordChange.vue'
 export default {
+  components: {
+    PasswordChange
+  },
+  data() {
+    return {
+      dialogVisible: false
+    }
+  },
   methods: {
     goToBlogAdmin() {
       this.$router.push('/admin/blog')
@@ -73,6 +87,12 @@ export default {
     },
     goToLinkAdmin() {
       this.$router.push('/admin/link')
+    },
+    modifyPassword() {
+      this.dialogVisible = true
+    },
+    handleClose() {
+      this.dialogVisible = false
     },
     logout() {
       sessionStorage.removeItem('username')

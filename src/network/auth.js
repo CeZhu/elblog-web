@@ -11,3 +11,14 @@ export function login(params) {
     data: params
   })
 }
+
+export function modiftyPassword(data) {
+  return request({
+    url: '/auth/password',
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data
+  })
+}
