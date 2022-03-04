@@ -8,7 +8,8 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  blogType: {}
+  blogType: {},
+  link: {}
 }
 
 const store = new Vuex.Store({

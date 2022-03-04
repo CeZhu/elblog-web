@@ -35,7 +35,7 @@
             <el-submenu index="5">
               <template slot="title"><i class="el-icon-setting" />系统管理</template>
               <el-menu-item-group>
-                <el-menu-item>友情链接管理</el-menu-item>
+                <el-menu-item @click="goToLinkAdmin">友情链接管理</el-menu-item>
                 <el-menu-item>修改密码</el-menu-item>
                 <el-menu-item>刷新系统缓存</el-menu-item>
                 <el-menu-item @click="logout">安全退出</el-menu-item>
@@ -70,6 +70,9 @@ export default {
     },
     goToBloggerAdmin() {
       this.$router.push('/admin/blogger')
+    },
+    goToLinkAdmin() {
+      this.$router.push('/admin/link')
     },
     logout() {
       sessionStorage.removeItem('username')

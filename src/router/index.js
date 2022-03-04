@@ -67,6 +67,10 @@ const router = new VueRouter({
         {
           path: '/admin/blogger',
           component: () => import('views/admin/blogger/BloggerAdmin')
+        },
+        {
+          path: '/admin/link',
+          component: () => import('views/admin/system/LinkAdmin')
         }
       ]
     }
