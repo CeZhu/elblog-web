@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     goHome() {
-      this.$router.push('/home')
+      this.$emit('refreshHome')
     },
     goAbout() {
       this.$router.push('/about')

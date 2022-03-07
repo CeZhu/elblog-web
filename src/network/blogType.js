@@ -13,6 +13,12 @@ export function getBlogTypesWithParams(params) {
   })
 }
 
+export function countBlogType() {
+  return request({
+    url: '/blogType/count'
+  })
+}
+
 export function addBlogType(data) {
   return request({
     url: '/blogType',

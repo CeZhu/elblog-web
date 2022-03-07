@@ -26,6 +26,7 @@ const router = new VueRouter({
       children: [
         {
           path: '/home',
+          name: 'home',
           component: () => import('views/home/Home')
         },
         {

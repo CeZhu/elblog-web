@@ -5,7 +5,10 @@
       <span id="title">最新博客</span>
     </el-header>
     <el-main>
-      <blog-list-item v-for="(item,index) in page.contents" :key="index" :blog="item" />
+      <div v-if="page.contents && page.contents.length!==0">
+        <blog-list-item v-for="(item,index) in page.contents" :key="index" :blog="item" />
+      </div>
+      <div v-else>没有找到相关内容</div>
     </el-main>
 
   </el-container>

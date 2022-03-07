@@ -89,6 +89,7 @@ export default {
     },
     init() {
       const params = this.$route.params
+      console.log(params)
       this.blog.id = params.id
       this.blog.title = params.title
       this.blog.content = params.content
