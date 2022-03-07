@@ -4,7 +4,7 @@
     <el-pagination
       layout="total,prev, pager, next"
       :total="page.total"
-      :current-page.sync="currentPage"
+      @current-change="pageHandler"
     />
   </div>
 </template>
@@ -18,23 +18,32 @@ export default {
   },
   data() {
     return {
-      page: {},
-      currentPage: 0
+      page: {
+        pageNum: 0,
+        pageSize: 10
+      }
     }
   },
   created() {
-    const params = {
-      pageNum: this.currentPage,
-      pageSize: 10,
-      typeId: this.$route.query.typeId
-    }
-    this.getHomeData(params)
+    this.init()
   },
   methods: {
     getHomeData(params) {
       getBlogs(params).then(res => {
         this.page = res.data
       })
+    },
+    pageHandler(currentPage) {
+      this.page.pageNum = currentPage - 1
+      this.init()
+    },
+    init() {
+      const params = {
+        pageNum: this.page.pageNum,
+        pageSize: this.page.pageSize,
+        typeId: this.$route.query.typeId
+      }
+      this.getHomeData(params)
     }
   }
 }
