@@ -31,6 +31,12 @@ export function getNextBlog(id) {
   })
 }
 
+export function sortByDate() {
+  return request({
+    url: '/blog/sortByDate'
+  })
+}
+
 export function addBlog(blog) {
   return request({
     url: '/blog',

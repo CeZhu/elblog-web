@@ -38,7 +38,9 @@
           <div slot="title">
             {{ blocks[2] }}
           </div>
-          <div slot="content" />
+          <div slot="content" class="side-block-release-date">
+            <div v-for="(item,index) in dateList" :key="index"><a @click="refreshPage({releaseDateStr:item.releaseDateStr})">{{ item.releaseDateStr }}({{ item.count }})</a></div>
+          </div>
         </side-block>
         <side-block>
           <div slot="img">
@@ -61,6 +63,7 @@ import NavBar from 'views/navBar/NavBar'
 import SideBlock from 'views/sideBlock/SideBlock'
 import { getBlogger } from 'network/blogger'
 import { countBlogType } from 'network/blogType'
+import { sortByDate } from 'network/home'
 export default {
   components: {
     NavBar,
@@ -71,16 +74,12 @@ export default {
       blocks: ['博主信息', '按日志类别', '按日志日期', '友情链接'],
       blogger: {},
       blogTypeList: [],
-      activeDate: ''
+      activeDate: '',
+      dateList: []
     }
   },
   created() {
-    getBlogger().then(res => {
-      this.blogger = res.data
-    })
-    countBlogType().then(res => {
-      this.blogTypeList = res.data
-    })
+    this.init()
   },
   methods: {
     refreshPage(param) {
@@ -88,6 +87,17 @@ export default {
       this.$router.push({
         name: 'home',
         query: param
+      })
+    },
+    init() {
+      getBlogger().then(res => {
+        this.blogger = res.data
+      })
+      countBlogType().then(res => {
+        this.blogTypeList = res.data
+      })
+      sortByDate().then(res => {
+        this.dateList = res.data
       })
     }
   }
@@ -121,7 +131,7 @@ img{
   margin:10px;
 }
 
-.side-block-blog-type div{
+.side-block-blog-type div,.side-block-release-date div{
   margin:10px 20px;
   font-size:14px;
   a{

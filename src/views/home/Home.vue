@@ -41,7 +41,8 @@ export default {
       const params = {
         pageNum: this.page.pageNum,
         pageSize: this.page.pageSize,
-        typeId: this.$route.query.typeId
+        typeId: this.$route.query.typeId,
+        releaseDateStr: this.$route.query.releaseDateStr
       }
       this.getHomeData(params)
     }
