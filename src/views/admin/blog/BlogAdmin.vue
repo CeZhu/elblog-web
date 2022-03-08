@@ -10,8 +10,17 @@
         @clickRemove="clickRemove"
       />
       <div class="search-bar">
-        <el-input placeholder="请输入标题" />
-        <el-button type="primary" icon="el-icon-search" size="mini">搜索</el-button>
+        <el-date-picker
+          v-model="dateRange"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          unlink-panels
+          value-format="yyyy-MM-dd"
+        />
+        <el-input v-model="title" placeholder="请输入标题" clearable="" />
+        <el-button type="primary" icon="el-icon-search" size="mini" @click="_getBlogs">搜索</el-button>
       </div>
     </div>
     <el-table :data="tableData" @selection-change="selectionChangeHandler">
@@ -48,7 +57,9 @@ export default {
       pageNum: 0,
       pageSize: 10,
       page: {},
-      selection: []
+      selection: [],
+      title: '',
+      dateRange: []
     }
   },
   computed: {
@@ -66,7 +77,11 @@ export default {
     _getBlogs() {
       const pageNum = this.pageNum
       const pageSize = this.pageSize
-      getBlogs({ pageNum, pageSize }).then(res => {
+      const title = this.title
+      const startDate = this.dateRange.length !== 0 ? this.dateRange[0] : ''
+      const endDate = this.dateRange.length !== 0 ? this.dateRange[1] : ''
+      console.log(this.dateRange)
+      getBlogs({ pageNum, pageSize, title, startDate, endDate }).then(res => {
         this.page = res.data
         this.tableData = res.data.contents
       })
@@ -102,7 +117,6 @@ export default {
     selectionChangeHandler(val) {
       this.selection = val
     }
-
   }
 }
 </script>
@@ -119,6 +133,11 @@ export default {
         .el-button{
           margin-left: 20px;
         }
+        .el-input{
+          width:200px;
+          margin-left:20px;
+        }
+
       }
       .crud{
         margin-right: 20px;
