@@ -7,6 +7,11 @@ export function getLinks(params) {
   })
 }
 
+export function getAllLinks() {
+  return request({
+    url: '/link/all'
+  })
+}
 export function addLink(data) {
   return request({
     url: '/link',

@@ -49,7 +49,9 @@
           <div slot="title">
             {{ blocks[3] }}
           </div>
-          <div slot="content" />
+          <div slot="content" class="side-block-link">
+            <div v-for="item in linkList" :key="item.id"><a :href="item.linkurl">{{ item.linkname }}</a></div>
+          </div>
         </side-block>
 
       </div>
@@ -64,6 +66,7 @@ import SideBlock from 'views/sideBlock/SideBlock'
 import { getBlogger } from 'network/blogger'
 import { countBlogType } from 'network/blogType'
 import { sortByDate } from 'network/home'
+import { getAllLinks } from 'network/link'
 export default {
   components: {
     NavBar,
@@ -75,7 +78,8 @@ export default {
       blogger: {},
       blogTypeList: [],
       activeDate: '',
-      dateList: []
+      dateList: [],
+      linkList: []
     }
   },
   created() {
@@ -98,6 +102,9 @@ export default {
       })
       sortByDate().then(res => {
         this.dateList = res.data
+      })
+      getAllLinks().then(res => {
+        this.linkList = res.data
       })
     }
   }
@@ -131,7 +138,7 @@ img{
   margin:10px;
 }
 
-.side-block-blog-type div,.side-block-release-date div{
+.side-block-blog-type div, .side-block-release-date div, .side-block-link div{
   margin:10px 20px;
   font-size:14px;
   a{
