@@ -1,7 +1,7 @@
 <template>
   <div id="front">
     <div class="top-img"><img src="~assets/img/logo.png" alt="JAVA个人博客系统"></div>
-    <nav-bar @refreshHome="refreshPage" />
+    <nav-bar @refreshHome="refreshPage" @search="search" />
     <div class="main">
       <div class="left"><router-view :key="activeDate" /></div>
       <div class="right">
@@ -91,6 +91,15 @@ export default {
       this.$router.push({
         name: 'home',
         query: param
+      })
+    },
+    search(param) {
+      this.activeDate = new Date().toString()
+      this.$router.push({
+        name: 'home',
+        query: {
+          searchParam: param
+        }
       })
     },
     init() {

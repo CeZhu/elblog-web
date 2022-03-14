@@ -5,8 +5,8 @@
       <div class="link" @click="goAbout">关于博主</div>
       <div class="link" @click="showLogin">后台登录</div>
       <div class="right">
-        <div class="search"><el-input placeholder="请输入要查询的关键字..." /></div>
-        <div class="btn"><el-button type="primary">搜索</el-button></div>
+        <div class="search"><el-input v-model="searchParam" placeholder="请输入要查询的关键字..." /></div>
+        <div class="btn"><el-button type="primary" @click="search">搜索</el-button></div>
       </div>
     </div>
   </div>
@@ -16,7 +16,8 @@
 export default {
   data() {
     return {
-      login: false
+      login: false,
+      searchParam: ''
     }
   },
   methods: {
@@ -28,6 +29,9 @@ export default {
     },
     showLogin() {
       this.$router.push('/login')
+    },
+    search() {
+      this.$emit('search', this.searchParam)
     }
   }
 }

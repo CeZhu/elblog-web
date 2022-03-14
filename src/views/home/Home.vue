@@ -11,7 +11,7 @@
 
 <script>
 import BlogList from 'views/blogList/BlogList'
-import { getBlogs } from 'network/home'
+import { getBlogs, elasticsearch } from 'network/home'
 export default {
   components: {
     BlogList
@@ -29,9 +29,15 @@ export default {
   },
   methods: {
     getHomeData(params) {
-      getBlogs(params).then(res => {
-        this.page = res.data
-      })
+      if (params.searchParam) {
+        elasticsearch(params).then(res => {
+          this.page = res.data
+        })
+      } else {
+        getBlogs(params).then(res => {
+          this.page = res.data
+        })
+      }
     },
     pageHandler(currentPage) {
       this.page.pageNum = currentPage - 1
@@ -42,7 +48,8 @@ export default {
         pageNum: this.page.pageNum,
         pageSize: this.page.pageSize,
         typeId: this.$route.query.typeId,
-        releaseDateStr: this.$route.query.releaseDateStr
+        releaseDateStr: this.$route.query.releaseDateStr,
+        searchParam: this.$route.query.searchParam
       }
       this.getHomeData(params)
     }

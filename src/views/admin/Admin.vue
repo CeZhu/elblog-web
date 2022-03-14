@@ -37,7 +37,7 @@
               <el-menu-item-group>
                 <el-menu-item @click="goToLinkAdmin">友情链接管理</el-menu-item>
                 <el-menu-item @click="modifyPassword">修改密码</el-menu-item>
-                <el-menu-item>刷新系统缓存</el-menu-item>
+                <!-- <el-menu-item>刷新系统缓存</el-menu-item> -->
                 <el-menu-item @click="logout">安全退出</el-menu-item>
               </el-menu-item-group>
             </el-submenu>

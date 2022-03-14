@@ -62,3 +62,10 @@ export function deleteBlogs(ids) {
     data: ids
   })
 }
+
+export function elasticsearch(params) {
+  return request({
+    url: '/search',
+    params
+  })
+}
