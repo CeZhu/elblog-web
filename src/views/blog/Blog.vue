@@ -66,7 +66,7 @@
 
 <script>
 import BlogItem from './BlogItem.vue'
-import { getBlogById, getPrevBlog, getNextBlog } from 'network/home'
+import { viewBlogById, getPrevBlog, getNextBlog } from 'network/home'
 import { getCommentList, saveComment } from 'network/comment'
 import { captcha } from 'network/auth'
 import Datetime from 'utils/datetime'
@@ -108,12 +108,12 @@ export default {
   },
   created() {
     const id = this.$route.params.id
-    this._getBlogById(id)
+    this._viewBlogById(id)
     this._captcha()
   },
   methods: {
-    _getBlogById(id) {
-      getBlogById(id).then(res => {
+    _viewBlogById(id) {
+      viewBlogById(id).then(res => {
         this.blog = res.data
         getPrevBlog(id).then(res => {
           this.prevBlog = res.data
@@ -131,7 +131,7 @@ export default {
     },
     changeBlog(id) {
       this.$router.push({ path: `/blog/${id}` })
-      this._getBlogById(id)
+      this._viewBlogById(id)
     },
     _captcha() {
       captcha().then(res => {

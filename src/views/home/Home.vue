@@ -40,6 +40,8 @@ export default {
       }
     },
     pageHandler(currentPage) {
+      // document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
       this.page.pageNum = currentPage - 1
       this.init()
     },

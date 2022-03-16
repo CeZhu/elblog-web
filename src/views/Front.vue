@@ -1,7 +1,7 @@
 <template>
   <div id="front">
     <div class="top-img"><img src="~assets/img/logo.png" alt="JAVA个人博客系统"></div>
-    <nav-bar @refreshHome="refreshPage" @search="search" />
+    <nav-bar class="nav-bar" @refreshHome="refreshPage" @search="search" />
     <div class="main">
       <div class="left"><router-view :key="activeDate" /></div>
       <div class="right">
@@ -126,6 +126,11 @@ export default {
   margin:auto;
   margin-bottom: 100px;
   font-family: "Helvet|ica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  .nav-bar{
+    position: sticky;
+    top:0px;
+    z-index: 999;
+  }
 }
 .top-img{
   height: 100px;

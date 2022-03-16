@@ -78,9 +78,14 @@ export default {
       const pageNum = this.pageNum
       const pageSize = this.pageSize
       const title = this.title
-      const startDate = this.dateRange.length !== 0 ? this.dateRange[0] : ''
-      const endDate = this.dateRange.length !== 0 ? this.dateRange[1] : ''
-      console.log(this.dateRange)
+      let startDate = ''
+      let endDate = ''
+
+      if (this.dateRange) {
+        startDate = this.dateRange.length !== 0 ? this.dateRange[0] : ''
+        endDate = this.dateRange.length !== 0 ? this.dateRange[1] : ''
+      }
+
       getBlogs({ pageNum, pageSize, title, startDate, endDate }).then(res => {
         this.page = res.data
         this.tableData = res.data.contents

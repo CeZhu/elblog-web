@@ -13,6 +13,12 @@ export function getBlogById(id) {
   })
 }
 
+export function viewBlogById(id) {
+  return request({
+    url: `/blog/view/${id}`
+  })
+}
+
 export function getPrevBlog(id) {
   return request({
     url: '/blog/prev',

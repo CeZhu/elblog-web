@@ -43,7 +43,7 @@
             </el-submenu>
           </el-menu>
         </el-aside>
-        <el-main><router-view /></el-main>
+        <el-main><router-view :key="activeDate" /></el-main>
       </el-container>
     </el-container>
 
@@ -62,7 +62,8 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      activeDate: ''
     }
   },
   methods: {
@@ -70,8 +71,9 @@ export default {
       this.$router.push('/admin/blog')
     },
     goToWriteBlog() {
+      // this.$router.push('/admin/blank')
+      this.activeDate = new Date().toString()
       this.$router.push('/admin/writeBlog')
-      this.$router.push('/admin/blank')
     },
     goToBlogTypeAdmin() {
       this.$router.push('/admin/blogType')

@@ -72,9 +72,11 @@ export default {
         if (valid) {
           addBlog(this.blog).then(res => {
             this.$alert('博客发布成功')
-            this.resetFields()
+            if (!this.blog.id) {
+              this.resetFields()
+            }
           }, err => {
-            console.log(err.response)
+            // console.log(err.response)
             this.$alert(err.response.data.message)
           })
         } else {
@@ -83,13 +85,14 @@ export default {
       })
     },
     resetFields() {
-      this.$refs.ruleForm.resetFields()
+      this.$nextTick(() => {
+        this.$refs.ruleForm.resetFields()
+      })
       this.blog.blogType.id = ''
       this.blog.content = ''
     },
     init() {
       const params = this.$route.params
-      console.log(params)
       this.blog.id = params.id
       this.blog.title = params.title
       this.blog.content = params.content
