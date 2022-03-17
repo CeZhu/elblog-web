@@ -22,7 +22,7 @@
           />
         </div>
         <div class="keyword">
-          <strong>关键字:</strong> <span v-for="(item,index) in blog.keyword" :key="index">{{ item }}</span>
+          <strong>关键字:</strong> <span v-for="(item,index) in keywordArray" :key="index"><a @click="clickKeyword(item)">{{ item }}</a></span>
         </div>
         <div class="change-page">
           <p>上一篇: <span :class="{active:hasPrev}" @click="changeBlog(prevBlog.id)">{{ prevBlogTitle }}</span></p>
@@ -104,6 +104,9 @@ export default {
     },
     hasNext() {
       return this.nextBlog.id !== undefined
+    },
+    keywordArray() {
+      return this.blog.keyword.split(' ')
     }
   },
   created() {
@@ -156,6 +159,14 @@ export default {
         this.$confirm('评论提交失败，请联系管理员。')
         this.refresh()
       })
+    },
+    clickKeyword(item) {
+      this.$router.push({
+        path: '/home',
+        query: {
+          searchParam: item
+        }
+      })
     }
   }
 
@@ -179,6 +190,11 @@ export default {
   }
   .keyword{
     padding:40px;
+    a{
+      margin:0 5px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
   .comment-list{

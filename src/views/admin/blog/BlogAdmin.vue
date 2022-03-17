@@ -127,7 +127,6 @@ export default {
     clickDownload() {
       download(this.getQueryParams()).then(res => {
         const blob = new Blob([res.data])
-        console.log(blob)
         const url = window.URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.style.display = 'none'
