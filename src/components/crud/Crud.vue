@@ -3,6 +3,7 @@
     <el-button type="primary" icon="el-icon-plus" @click="add">新增</el-button>
     <el-button type="success" icon="el-icon-edit" :disabled="!edible" @click="edit">修改</el-button>
     <el-button type="danger" icon="el-icon-delete" :disabled="!removable" @click="remove">删除</el-button>
+    <el-button type="warning" icon="el-icon-download" :disabled="!exportable" @click="download">导出</el-button>
   </div>
 </template>
 
@@ -16,6 +17,10 @@ export default {
     removable: {
       type: Boolean,
       default: false
+    },
+    exportable: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -27,6 +32,9 @@ export default {
     },
     remove() {
       this.$emit('clickRemove')
+    },
+    download() {
+      this.$emit('clickDownload')
     }
   }
 }

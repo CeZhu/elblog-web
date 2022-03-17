@@ -75,3 +75,12 @@ export function elasticsearch(params) {
     params
   })
 }
+
+export function download(params) {
+  return request({
+    url: '/blog/download',
+    method: 'get',
+    responseType: 'blob',
+    params
+  })
+}

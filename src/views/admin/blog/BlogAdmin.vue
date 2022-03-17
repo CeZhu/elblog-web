@@ -5,9 +5,11 @@
         class="crud"
         :edible="edible"
         :removable="removable"
+        :exportable="exportable"
         @clickAdd="clickAdd"
         @clickEdit="clickEdit"
         @clickRemove="clickRemove"
+        @clickDownload="clickDownload"
       />
       <div class="search-bar">
         <el-date-picker
@@ -46,7 +48,7 @@
 
 <script>
 import Crud from 'components/crud/Crud'
-import { getBlogs, deleteBlog, deleteBlogs } from 'network/home'
+import { getBlogs, deleteBlog, deleteBlogs, download } from 'network/home'
 export default {
   components: {
     Crud
@@ -68,6 +70,9 @@ export default {
     },
     removable() {
       return this.selection.length !== 0
+    },
+    exportable() {
+      return true
     }
   },
   created() {
@@ -75,21 +80,25 @@ export default {
   },
   methods: {
     _getBlogs() {
-      const pageNum = this.pageNum
-      const pageSize = this.pageSize
-      const title = this.title
+      getBlogs(this.getQueryParams()).then(res => {
+        this.page = res.data
+        this.tableData = res.data.contents
+      })
+    },
+    getQueryParams() {
       let startDate = ''
       let endDate = ''
-
       if (this.dateRange) {
         startDate = this.dateRange.length !== 0 ? this.dateRange[0] : ''
         endDate = this.dateRange.length !== 0 ? this.dateRange[1] : ''
       }
-
-      getBlogs({ pageNum, pageSize, title, startDate, endDate }).then(res => {
-        this.page = res.data
-        this.tableData = res.data.contents
-      })
+      return {
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+        title: this.title,
+        startDate,
+        endDate
+      }
     },
     editBlog(blog) {
       this.$router.push({ name: 'writeBlog', params: blog })
@@ -114,6 +123,22 @@ export default {
           this._getBlogs()
         })
       }).catch(() => {})
+    },
+    clickDownload() {
+      download(this.getQueryParams()).then(res => {
+        const blob = new Blob([res.data])
+        console.log(blob)
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = url
+        const fileName = 'download.xlsx'
+        link.setAttribute('download', fileName)
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(url)
+      })
     },
     currentChangeHandler(currentPage) {
       this.pageNum = currentPage - 1
