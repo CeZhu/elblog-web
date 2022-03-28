@@ -22,3 +22,9 @@ export function modiftyPassword(data) {
     data
   })
 }
+
+export function logout() {
+  return request({
+    url: '/sys/logout'
+  })
+}

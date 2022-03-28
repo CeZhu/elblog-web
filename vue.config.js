@@ -15,5 +15,12 @@ module.exports = {
   css: {
     requireModuleExtension: true
   }
+  // devServer: {
+  //   proxy: {
+  //     '/api': {
+  //       target: '/'
+  //     }
+  //   }
+  // }
 }
 

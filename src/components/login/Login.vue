@@ -27,6 +27,7 @@
 
 <script>
 import { login } from 'network/auth'
+import { setToken } from 'network/token'
 export default {
   data() {
     return {
@@ -54,8 +55,8 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          login(this.user).then(() => {
-            sessionStorage.setItem('username', this.user.username)
+          login(this.user).then(res => {
+            setToken(res.data, 1)
             this.$router.push('/admin/blog')
           }).catch(err => {
             this.loading = false

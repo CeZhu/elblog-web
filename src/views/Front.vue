@@ -14,7 +14,7 @@
           </div>
           <div slot="content" class="side-block-content">
             <div>
-              <el-avatar :src="blogger.imagename" :size="100" />
+              <el-avatar :src="blogger.imagename" :size="100" crossorigin="anonymous" />
             </div>
             <div><b>{{ blogger.nickname }}</b></div>
             <div>{{ blogger.sign }}</div>

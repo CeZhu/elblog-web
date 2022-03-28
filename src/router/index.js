@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { getToken } from 'network/token'
 
 // 解决重复点击菜单报错
 const originalPush = VueRouter.prototype.push
@@ -80,14 +81,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const username = sessionStorage.getItem('username')
   if (to.path === '/login') {
-    if (username) {
+    if (getToken()) {
       next('/admin/blog')
     }
     next()
   } else if (to.path.includes('/admin')) {
-    if (username) {
+    if (getToken()) {
       next()
     } else {
       next('/login')

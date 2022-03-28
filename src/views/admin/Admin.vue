@@ -38,7 +38,7 @@
                 <el-menu-item @click="goToLinkAdmin">友情链接管理</el-menu-item>
                 <el-menu-item @click="modifyPassword">修改密码</el-menu-item>
                 <!-- <el-menu-item>刷新系统缓存</el-menu-item> -->
-                <el-menu-item @click="logout">安全退出</el-menu-item>
+                <el-menu-item @click="_logout">安全退出</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
@@ -56,6 +56,8 @@
 
 <script>
 import PasswordChange from './system/childComp/PasswordChange.vue'
+import { logout } from 'network/auth'
+import { removeToken } from 'network/token'
 export default {
   components: {
     PasswordChange
@@ -96,9 +98,11 @@ export default {
     handleClose() {
       this.dialogVisible = false
     },
-    logout() {
-      sessionStorage.removeItem('username')
-      this.$router.push('/home')
+    _logout() {
+      logout().then(() => {
+        removeToken()
+        this.$router.push('/home')
+      })
     }
   }
 }
