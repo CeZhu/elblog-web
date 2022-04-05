@@ -4,7 +4,6 @@
       <el-header height="100px">
         <img src="~assets/img/logo.png" @click="goToHome">
       </el-header>
-
       <el-container>
         <el-aside>
           <el-menu>
